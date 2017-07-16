@@ -6,6 +6,11 @@ function saveBookmark(e){
   //Geting Values from Input Fields
   let siteName = document.getElementById('siteName').value;
   let siteUrl = document.getElementById('siteUrl').value;
+
+  if(!formValidation(siteName, siteUrl)){
+    return false;
+  }
+
   let bookmark = {
     name: siteName,
     url: siteUrl
@@ -28,6 +33,9 @@ function saveBookmark(e){
     //re-setting
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
   }
+
+  //Cleaning up the form
+  document.getElementById('myForm').reset();
 
   //Update dom
   getBookmarks();
@@ -76,3 +84,19 @@ function getBookmarks(){
      >Delete</a></h3></div>`
    }
  };
+
+//Form Validation
+function formValidation(siteName, siteUrl){
+  if(!siteName || !siteUrl){
+    alert("Please Fill in the Form");
+    return false;
+  }
+  let expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+  let regex = new RegExp(expression);
+  if(!siteUrl.match(regex)){
+    alert('Please Use a Valid URL');
+    return false;
+  }
+
+  return true;
+}
