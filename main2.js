@@ -28,6 +28,10 @@ function saveBookmark(e){
   } else {
     //Fetch from local storage
     let bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+
+    //Checking whether exists or not
+
+
     //adding to it
     bookmarks.push(bookmark);
     //re-setting
@@ -87,6 +91,7 @@ function getBookmarks(){
 
 //Form Validation
 function formValidation(siteName, siteUrl){
+  let bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
   if(!siteName || !siteUrl){
     alert("Please Fill in the Form");
     return false;
@@ -97,6 +102,11 @@ function formValidation(siteName, siteUrl){
     alert('Please Use a Valid URL');
     return false;
   }
-
+  for (let d in bookmarks){
+  if(bookmarks[d].name.toLowerCase() == siteName.toLowerCase()){
+    alert('Website Already Bookmarked');
+    return false;
+  }
+ }
   return true;
 }
