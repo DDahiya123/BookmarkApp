@@ -48,14 +48,6 @@ class Bookmark {
     this.bookmarksResults.addEventListener("click", this.deleteBookmark)
   }
 
-  init() {
-    //setToLocalStorage is helper function with an object in it
-    //ref line 90
-    let Dom = this.setToLocalStorage("bookmarks", "get");
-    //constructorDom function bellow on line 104
-    //i checked if the dom was not a falsy value and construct afterwards
-    if (Dom) return this.constructorDom(Dom);
-  }
 
 
   saveBookmark(e) {
@@ -193,11 +185,7 @@ class Bookmark {
       this.removeChild(nodeParent)
 
     }
-
   }
-
-
-}
 
 //this makes a new instance of the object
 //node its down here beause classes are not hoisted.
